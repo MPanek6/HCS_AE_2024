@@ -61,7 +61,10 @@ def get_study_form(n, pin):
 def get_form_data(form):
     pins=[]
     for p in form['props']['children'][1:]:
-        val = p['props']['children']['props']['value']
+        try:
+            val = p['props']['children']['props']['value']
+        except KeyError: 
+            return False, False, False
         if not val:
             return False, False, False
         pins.append(val)
