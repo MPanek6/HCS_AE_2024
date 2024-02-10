@@ -6,7 +6,6 @@ from dash import html
 from dash_extensions.enrich import Input, Output, State, no_update
 
 from src.utils import get_study_form, gen_pin, get_form_data
-from src.logger import logger
 
 def get_callbacks(app):
     

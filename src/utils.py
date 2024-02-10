@@ -10,7 +10,6 @@ def gen_pin():
     return random.randint(1000, 9999)
 
 
-
 def get_study_form(n, pin):
     children = [dmc.Col(html.H3(f'Level {n}'))]
     
@@ -62,10 +61,10 @@ def get_study_form(n, pin):
 def get_form_data(form):
     pins=[]
     for p in form['props']['children'][1:]:
-        try:
-            pins.append(p['props']['children']['props']['value'])
-        except KeyError:
+        val = p['props']['children']['props']['value']
+        if not val:
             return False, False, False
+        pins.append(val)
     usability_q = pins.pop()  
     secure_q = pins.pop()
     
