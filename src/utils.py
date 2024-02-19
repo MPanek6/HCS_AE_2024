@@ -72,4 +72,14 @@ def get_form_data(form):
     secure_q = pins.pop()
     
     return pins, secure_q, usability_q
-    
+
+
+def get_end_form_data(form):
+    vals=[]
+    for p in form['props']['children'][:2]:
+        val = p['props']['children']['props']['value']
+        if not val:
+            return False
+        vals.append(val)
+    return vals
+
