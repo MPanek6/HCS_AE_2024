@@ -66,9 +66,11 @@ def get_callbacks(app):
             if actual_pins != entered_pins:
                 lives = lives-1
                 if lives==0:
-                    return no_update, no_update, no_update, lives, no_update, True
+                    data.append({'Participant ID': participant, 'Level': btn, 'Actual Pins': actual_pins, 'Entered Pins': entered_pins, 'Secure question': secure_q, 'Usable question': usability_q})
+                    df = pd.DataFrame.from_dict(data)
+                    return no_update, df.to_dict('records'), no_update, lives, no_update, True
                 return no_update, no_update, btn-1, lives, no_update, no_update
-            data.append({'Participant ID': participant, 'Level': btn, 'Actual Pins': data[-1]['Actual Pins'] + [new_pin], 'Entered Pins': entered_pins, 'Secure question': secure_q, 'Usable question': usability_q})
+            data.append({'Participant ID': participant, 'Level': btn, 'Actual Pins': actual_pins, 'Entered Pins': entered_pins, 'Secure question': secure_q, 'Usable question': usability_q})
             df = pd.DataFrame.from_dict(data)
         return get_study_form(btn+1, new_pin), df.to_dict('records'), no_update, lives, new_pin, no_update
     
